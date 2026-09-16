@@ -1,14 +1,7 @@
 import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { Outlet, NavLink, useLocation } from 'react-router-dom';
-import { Menu, X, MessageSquare, ArrowUp, MapPin, Facebook, Instagram, Twitter, Users, ChevronDown } from 'lucide-react';
+import { Menu, X, MessageSquare, ArrowUp, MapPin, Users, ChevronDown } from 'lucide-react';
 import logoImg from '../../imports/sherixlogo.png';
-function TikTokIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.75a8.27 8.27 0 004.84 1.55V6.85a4.85 4.85 0 01-1.07-.16z" />
-    </svg>
-  );
-}
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -80,49 +73,26 @@ export function Layout() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-800">
-      {/* Campaign Bar + Nav — sticky together */}
-      <div className="sticky top-0 z-50">
-        {/* Campaign Bar */}
-        <div className="bg-red-600 text-white text-xs">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-9 flex items-center justify-between">
-            <div className="flex items-center gap-1.5 text-red-100">
-              <MapPin className="w-3.5 h-3.5 shrink-0" />
-              <span>Accra, Ghana</span>
+      <div className="sticky top-0 z-50 border-b border-gray-200/80 bg-white/90 backdrop-blur-md shadow-[0_1px_0_rgba(15,23,42,0.04)]">
+        <header className={`transition-all duration-300 ${scrolled ? 'shadow-sm shadow-red-100/60' : ''}`}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center relative">
+            {/* CTA buttons - far left */}
+            <div className="hidden md:flex items-center gap-2 absolute left-4 sm:left-6 lg:left-8">
+              <NavLink to="/partner" className="flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold text-white bg-red-600 rounded-full hover:bg-red-700 transition-all shadow-sm shadow-red-200/80 hover:shadow-red-200">
+                <Users className="w-3.5 h-3.5" />
+                Become a Service Provider
+              </NavLink>
             </div>
-            <div className="flex items-center gap-3">
-              <a href="#" aria-label="Facebook" className="text-red-200 hover:text-white transition-colors">
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a href="#" aria-label="Instagram" className="text-red-200 hover:text-white transition-colors">
-                <Instagram className="w-4 h-4" />
-              </a>
-              <a href="#" aria-label="X" className="text-red-200 hover:text-white transition-colors">
-                <Twitter className="w-4 h-4" />
-              </a>
-              <a href="#" aria-label="TikTok" className="text-red-200 hover:text-white transition-colors">
-                <TikTokIcon className="w-4 h-4" />
-              </a>
-            </div>
-          </div>
-        </div>
 
-        {/* Nav */}
-        <header className={`bg-white transition-shadow duration-300 ${scrolled ? 'shadow-md border-b border-gray-100' : 'border-b border-gray-100'}`}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[68px] flex items-center justify-between">
-            {/* Logo */}
-            <NavLink to="/" className="flex items-center shrink-0">
-              <img src={logoImg} alt="Sherix" className="h-30 w-auto object-contain" style={{ mixBlendMode: 'multiply' }} />
-            </NavLink>
-
-            {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-1">
+            {/* Desktop nav - centered */}
+            <nav className="hidden md:flex items-center gap-1 mx-auto">
               {navLinks.map(link => (
                 <NavLink
                   key={link.to}
                   to={link.to}
                   end={link.to === '/'}
                   className={({ isActive }) =>
-                    `px-4 py-2 rounded-lg text-sm font-medium transition-colors ${isActive ? 'text-red-600 bg-red-50' : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'}`
+                    `px-3.5 py-2 rounded-full text-xs font-medium tracking-[0.02em] uppercase transition-all ${isActive ? 'text-red-600 bg-red-50 shadow-sm' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`
                   }
                 >
                   {link.label}
@@ -157,13 +127,10 @@ export function Layout() {
               </div>
             </nav>
 
-            {/* CTA buttons */}
-            <div className="hidden md:flex items-center gap-2">
-              <NavLink to="/partner" className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors shadow-sm shadow-red-200">
-                <Users className="w-3.5 h-3.5" />
-                Become a Service Provider
-              </NavLink>
-            </div>
+            {/* Logo - far right */}
+            <NavLink to="/" className="hidden md:flex items-center shrink-0 py-2 absolute right-4 sm:right-6 lg:right-8">
+              <img src={logoImg} alt="Sherix" className="h-20 w-auto object-contain" style={{ mixBlendMode: 'multiply' }} />
+            </NavLink>
 
             {/* Mobile toggle */}
             <button
@@ -254,7 +221,7 @@ export function Layout() {
             </NavLink>
           </div>
 
-          <div className="mt-10 grid gap-10 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr]">
+          <div className="mt-10 grid gap-10 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
             <div>
               <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-white">Company</h2>
               <ul className="space-y-3 text-sm">
@@ -290,33 +257,6 @@ export function Layout() {
                 <li><a href="https://www.apple.com/app-store/" target="_blank" rel="noreferrer" className="text-gray-400 transition-colors hover:text-red-400">App Store</a></li>
                 <li><a href="https://play.google.com/store" target="_blank" rel="noreferrer" className="text-gray-400 transition-colors hover:text-red-400">Google Play</a></li>
               </ul>
-            </div>
-
-            <div>
-              <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-white">Social</h2>
-              <div className="flex flex-wrap gap-3">
-                {[
-                  { label: 'Facebook', href: 'https://www.facebook.com', icon: Facebook },
-                  { label: 'Instagram', href: 'https://www.instagram.com', icon: Instagram },
-                  { label: 'X', href: 'https://x.com', icon: Twitter },
-                  { label: 'TikTok', href: 'https://www.tiktok.com', icon: TikTokIcon },
-                ].map(social => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={social.label}
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 transition-all hover:border-red-500 hover:bg-red-500/10 hover:text-red-400"
-                  >
-                    {social.icon === TikTokIcon ? (
-                      <TikTokIcon className="h-4 w-4" />
-                    ) : (
-                      <social.icon className="h-4 w-4" />
-                    )}
-                  </a>
-                ))}
-              </div>
             </div>
           </div>
 
