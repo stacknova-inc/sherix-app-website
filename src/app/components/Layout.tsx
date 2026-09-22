@@ -129,7 +129,7 @@ export function Layout() {
 
             {/* Mobile logo - left; hidden on md+ */}
             <NavLink to="/" className="md:hidden flex items-center shrink-0 py-2 absolute left-4">
-              <img src={logoImg} alt="Sherix" className="h-8 w-auto object-contain" style={{ mixBlendMode: 'multiply' }} />
+              <img src={logoImg} alt="Sherix" className="h-16 w-auto object-contain" style={{ mixBlendMode: 'multiply' }} />
             </NavLink>
 
             {/* Desktop logo - right; hidden on small screens */}
